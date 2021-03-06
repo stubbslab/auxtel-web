@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="{{ url_for('test_pages.static', filename='stylesheets/style.css') }}" />
+
+<table class="crimson">
+  <thead>
+    <tr>
+    {% for attr in color_attr%}
+      <th>{{attr}}</th>
+    {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for color in colors %}
+    <tr>
+      <td>{{color.name}}</td>
+      <td>{{color.created_at}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

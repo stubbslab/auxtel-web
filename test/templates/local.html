@@ -1,0 +1,5 @@
+<link rel="stylesheet" href="{{ url_for('test_pages.static', filename='stylesheets/style.css') }}" />
+
+{% for pic in pics %}
+  <img src="{{url_for("test_pages.static", filename="images/" + pic)}}">
+{% endfor %}

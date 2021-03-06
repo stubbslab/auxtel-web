@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/main.css') }}" />
+<body>
+  {% for pic in pics %}
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{pic}}">
+          <img src="{{pic}}">
+      </a>
+      <div class="desc">Add a description of the image here</div>
+    </div>
+  </div>
+  {% endfor %}
+</body>
