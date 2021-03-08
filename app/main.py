@@ -19,9 +19,8 @@ imageRoot = Path(app.static_folder)/Path("images")
 
 
 @app.route('/', defaults={'num':10})
-@app.route('/<num>')
+@app.route('/<int:num>')
 def table(num):
-    print(num)
     sPaths = [*sorted(imageRoot.iterdir(), key=os.path.getmtime, reverse=True)][-int(num):]
     imgs = [*map(Image, sPaths)]
     return render_template("index.html", imgs = imgs, img_attr = ['date','seq'])
@@ -33,6 +32,9 @@ def events(date, seq):
     imgs = [Image(matchPath)]
     return render_template("data.html", imgs = imgs)
     
+    
+
+def timeSort():
     
 
 def scan(root: Path, date: str, seq: str) -> Path:

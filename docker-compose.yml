@@ -1,14 +1,35 @@
 version: '3.6'
 
 services:
-  web:
+  app:
+    container_name: auxtel-app
     image: auxtel-web
     build: ./
     volumes:
       - ./app:/app
-    ports:
-      - "80:80"
+      - /data_dev/imExam:/app/static/images
     environment:
       - FLASK_APP=app/main.py
       - FLASK_DEBUG=0
-      - 'RUN=flask run --host=0.0.0.0 --port=80
+      - 'RUN=flask run --host=0.0.0.0 --port=80'
+
+  web:
+    container_name: swag
+    image: linuxserver/swag
+    restart: always
+    cap_add:
+     - NET_ADMIN
+    env_file:
+      - ./env/swag.env
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "web:/config"
+#    active site-confs
+      - "./web/site-confs:/config/nginx/site-confs"
+#     catch-all site
+      - "./web/conf.d/catch-all.conf.nginx:/etc/nginx/conf.d/catch-all.conf"
+
+volumes:
+    web:

@@ -1,0 +1,40 @@
+######################## main server block #####################################
+################################################################################
+server {
+	listen 80;
+	server_name rubinvis.rubinauxtel.org;
+	return 301 https://$server_name$request_uri;
+}
+
+
+server {
+	listen 443 ssl http2;
+
+	root /config/www;
+	index index.html index.htm index.php;
+
+	server_name rubinvis.rubinauxtel.org;
+
+  # Proxy origin IP
+  proxy_bind $server_addr;
+
+	# Prevent search indexing, from https://github.com/linuxserver/docker-letsencrypt#site-config-and-reverse-proxy
+	add_header X-Robots-Tag "noindex, nofollow, nosnippet, noarchive";
+
+  # All ssl related config in ssl.conf
+  include /config/nginx/ssl.conf;
+
+	client_max_body_size 0;
+
+  location / {
+      include /config/nginx/proxy.conf;
+      proxy_pass http://app:80;
+      proxy_intercept_errors on;
+
+
+			proxy_set_header Connection "";
+  }
+
+
+
+}
