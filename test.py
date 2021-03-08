@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Mar  5 17:50:48 2021
-
 @author: brodi
 """
 from dataclasses import dataclass

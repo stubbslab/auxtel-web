@@ -3,16 +3,16 @@
 <table class="crimson">
   <thead>
     <tr>
-    {% for attr in color_attr%}
+    {% for attr in img_attr%}
       <th>{{attr}}</th>
     {% endfor %}
     </tr>
   </thead>
   <tbody>
-    {% for color in colors %}
+    {% for img in imgs %}
     <tr>
-      <td>{{color.name}}</td>
-      <td>{{color.created_at}}</td>
+      <td><a href="{{ url_for('events', date = img.cleanDate(), seq = img.seq) }}"">{{img.date}}</a></td>
+      <td>{{img.seq}}</td>
     </tr>
     {% endfor %}
   </tbody>
