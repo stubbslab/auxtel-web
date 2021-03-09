@@ -1,14 +1,30 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}"></link>
 
-<table class="crimson">
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript src="{{ url_for('static', filename='js/refresh.js') }}"></script>
+</head>
+
+<body>
+
+{{ header|safe }}
+
+<div id="tableHolder">
+
+<table class="crimson" id="tableHolder">
+
   <thead>
+
     <tr>
     {% for attr in img_attr%}
       <th>{{attr}}</th>
     {% endfor %}
     </tr>
+
   </thead>
+
   <tbody>
+
     {% for img in imgs %}
     <tr>
       <td><a href="{{ url_for('events', date = img.cleanDate(), seq = img.seq) }}"">{{img.date}}</a></td>
@@ -16,4 +32,9 @@
     </tr>
     {% endfor %}
   </tbody>
+
 </table>
+
+</div>
+
+</body>
