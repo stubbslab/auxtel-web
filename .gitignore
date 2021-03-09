@@ -126,6 +126,10 @@ dmypy.json
 
 # images
 *.png
+app/static/images/*
+
+# pid
+*.pid
 
 # env
 *.env
