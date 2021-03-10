@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/main.css') }}" />
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript src="{{ url_for('static', filename='js/refresh.js') }}"></script>
+</head>
 <body>
+  <div id="refresher">
   {% for img in imgs %}
   <div class="responsive">
     <div class="gallery">
@@ -7,9 +12,9 @@
       <a target="_blank" href="{{url_for("static", filename="images/" + img.name)}}">
           <img src="{{url_for("static", filename="images/" + img.name)}}">
       </a>
-
       <div class="desc">{{img.name}}</div>
     </div>
+  </div>
   </div>
   {% endfor %}
 </body>

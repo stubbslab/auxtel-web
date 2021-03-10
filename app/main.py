@@ -39,11 +39,17 @@ def table(num):
 @app.route('/events/<date>/<seq>')
 def events(date, seq):
     matchPath = scan(imageRoot, date, seq)
+    # use list to allow update with many images on one page
     imgs = [Image(matchPath)]
     return render_template("data.html", imgs = imgs)
     
 
-
+@app.route('/current')
+def current():
+    imgs = timeSort(imageRoot, 1)
+    print(imgs)
+    # imgs = [img]
+    return render_template("current.html", imgs = imgs)
 
 def prepMd(file: Path) -> str:
     with open(file, "r") as hdFi:
@@ -64,20 +70,19 @@ def prepMd(file: Path) -> str:
         mdCSS = "<style>" + cssString + "</style>"
         
         return mdCSS + mdTemp
-    
-        
+      
 
 def timeSort(root: Path, num: int) -> List[Image]:
     sPaths =  [
                 *sorted(
                     root.rglob("./*.png"),
-                    key=os.path.getmtime,
-                    reverse=True)
+                    key = os.path.getmtime,
+                    reverse = True)
                 ]
 
     search = r'^(.+_){2}((\d+[-/]\d+[-/]\d+))+(.+_)+(\d+).*$'
     r = re.compile(search)
-    clean_sPaths = [fi for fi in sPaths if r.match(fi.name)][-num:]
+    clean_sPaths = [fi for fi in sPaths if r.match(fi.name)][:num]
 
     return [*map(Image, clean_sPaths)]
     
@@ -95,4 +100,4 @@ def scan(root: Path, date: str, seq: str) -> Path:
 
 
 if __name__ == '__main__':
-    app.run(debug = False, port = 5001)
+    app.run(debug = True, port = 5001)

@@ -13,7 +13,13 @@ To enlarge the table, use
  https://rubinvis.rubinauxtel.org/<num>
 ```
 
-The table refreshes every 10s.
+To get the most recent events, use
+
+```bash
+https://rubinvis.rubinauxtel.org/current
+```
+
+The table and current event refresh every .5s.
 
 
 -------------------------
