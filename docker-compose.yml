@@ -7,7 +7,7 @@ services:
     build: ./
     volumes:
       - ./app:/app
-      - /data_dev/imExam:/app/static/images
+      - /data/imExam:/app/static/images
     environment:
       - FLASK_APP=app/main.py
       - FLASK_DEBUG=0
