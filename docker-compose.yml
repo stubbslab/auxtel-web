@@ -4,6 +4,7 @@ services:
   app:
     container_name: auxtel-app
     image: auxtel-web
+    restart: always
     build: ./
     volumes:
       - ./app:/app
